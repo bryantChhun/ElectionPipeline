@@ -1,0 +1,75 @@
+- fix all file paths for script
+- get it to run normally
+- look into threading for file writing
+
+- generate new tests
+	- ones with bad entries (test for each of the conditions)
+	- ones with easily testable medians
+	- large sets
+	- larger sets
+	-
+
+CMTE_id = 	0
+ZIP	 =	10
+trans_dt=	13
+trans_amt=	14
+OTHER_ID = 	15
+
+==== 500k lines ===========
+146 seconds for 500k lines.
+0.333 seconds for 1000 lines by finish
+
+time to calculate medianvals_by_date = ----------- 48.93051815032959 seconds ------------
+writing dates
+total time = ----------- 157.71443486213684 seconds ------------
+
+time to calculate medianvals_by_date = ----------- 2.2282121181488037 seconds ------------
+writing dates
+total time = ----------- 12.86789584159851 seconds ------------
+
+time to calculate medianvals_by_date = ----------- 45.5723876953125 seconds ------------
+writing dates
+total time = ----------- 146.97377705574036 seconds ------------
+
+time to calculate medianvals_by_date = ----------- 45.979235887527466 seconds ------------
+writing dates
+total time = ----------- 145.45585298538208 seconds ------------
+
+
+
+
+
+# Insight_DataEngineeringChallenge_submission
+
+PROJECT REQUIREMENTS:
+- Python 3.6
+- Python Libraries: CSV, time, numpy, functools, copy, os, sys (these should all be part of the Python 3.6 standard library)
+
+CONSIDERATIONS:
+- I use command line alias "python" to call python3.  Please make sure your terminal enviroment alias is set appropriately.
+
+PROGRAM STRUCTURE:
+The program requires five files:
+- execute.py
+- file_considerations.py
+- file_management.py
+- medianvals.py
+- run.sh file
+
+- file_management.py contains the FileManagement class and "file_input" and "file_output" methods.  
+- file_considerations.py contains the FileConsiderations class and the "set_flags" and "check_flags" methods.
+    FileConsiderations class also initializes instance booleans: 
+    cmte_id_flag, zip_flag, transaction_dt_flag, transaction_amt_flag, other_id_flag, invalid_line
+- medianvals.py contains the MedianVals class and the "medianvals_by_date", "calculate_medianvals_by_date", 
+    "medianvals_by_zip", and "nonbankers_rounding"
+    MedianVals class also initializes instance structures:
+    medianzip_out (list), medianzip_dict = (dictionary, medianzip_totals = (dictionary)
+    mediandate_out = (list), mediandate_dict = (dictionary), mediandate_totals = (dictionary)
+  
+METHODOLOGY:
+- I use class variables to store calculations and flags and then call them during file writing.  This means you can call those variable at any time, or pass them to a UI to get current-state values.
+- Every line passes first through FileConsiderations, which sets the booleans for whether the line should be accepted and what action to take.
+- medianvals accepts the results that pass through FileConsiderations and then extracts values based on ID, DATE or ZIP, and AMT of contribution.  All values are written to one of the above instance structures.
+
+OPTIMIZATION:
+- I store amts as dictionaries for medianzip and mediandate because the keys are hashable and ID/DATE and ID/ZIP lookup is 
