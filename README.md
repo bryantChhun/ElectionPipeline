@@ -33,7 +33,7 @@ METHODOLOGY:
 
 OPTIMIZATION:
 - I store amounts in np.arrays for medianzip and mediandate dictionaries because the keys are hashable and ID/DATE and ID/ZIP lookup is O(1)
-- I tested amt value as np.array, lists and tuples and found that np.array with np.median(overwrite_input=True) gave best performance and seemingly did not affect the output.
+- Need to switch to binary heap method for rolling median calculation.
 
 MY TESTS:
 - I have tests under bryant_testsuite.py that you can run using run_bryants_tests.sh.  You'll have to comment out the lines under the .sh script to select those tests you want to run.
