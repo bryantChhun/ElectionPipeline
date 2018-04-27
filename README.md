@@ -1,4 +1,4 @@
-# Insight_DataEngineeringChallenge_submission
+# simple pipeline to calculate a few values out of election data
 
 PROJECT REQUIREMENTS:
 - Python 3.6
